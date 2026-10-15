@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.notesapp.fragments.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_EditNoteFragment"
+            app:destination="@id/addEditNoteFragment"
+            app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_viewNoteFragment"
+            app:destination="@id/viewNoteFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditNoteFragment"
+        android:name="com.example.notesapp.fragments.AddEditNoteFragment"
+        android:label="fragment_add_edit_note"
+        tools:layout="@layout/fragment_add_edit_note" >
+        <action
+            android:id="@+id/action_addEditNoteFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="note"
+            app:argType="com.example.notesapp.room.Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="isAdd"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewNoteFragment"
+        android:name="com.example.notesapp.fragments.ViewNoteFragment"
+        android:label="fragment_view_note"
+        tools:layout="@layout/fragment_view_note" >
+        <action
+            android:id="@+id/action_viewNoteFragment_to_addEditNoteFragment"
+            app:destination="@id/addEditNoteFragment"
+            app:popUpTo="@id/viewNoteFragment" />
+        <argument
+            android:name="note"
+            app:argType="com.example.notesapp.room.Note" />
+    </fragment>
+</navigation>
