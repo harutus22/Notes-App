@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.App
 import com.example.notesapp.databinding.FragmentMainBinding
 import com.example.notesapp.recycler_view.NoteRecyclerViewAdapter
+import com.example.notesapp.utils.CustomFirebaseLogger
 import com.example.notesapp.viewmodel.NoteViewModel
 import com.example.notesapp.viewmodel.NoteViewModelFactory
 
@@ -56,6 +57,7 @@ class MainFragment : Fragment() {
 
     private fun initAdapter() {
         adapter = NoteRecyclerViewAdapter { note ->
+            CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.VIEW_NOTE, note)
             val action = MainFragmentDirections.actionMainFragmentToViewNoteFragment(note = note)
             findNavController().navigate(action)
         }

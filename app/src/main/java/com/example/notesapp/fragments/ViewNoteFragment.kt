@@ -51,12 +51,11 @@ class ViewNoteFragment : Fragment() {
                 note = note,
                 isAdd = false
             )
-            CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.VIEW_NOTE, note)
             findNavController().navigate(action)
         }
         binding.delete.setOnClickListener {
-            viewModel.deleteNote(note)
             CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.REMOVE_NOTE, note)
+            viewModel.deleteNote(note)
             findNavController().popBackStack()
         }
     }
