@@ -13,6 +13,7 @@ import com.example.notesapp.App
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentAddEditNoteBinding
 import com.example.notesapp.room.Note
+import com.example.notesapp.utils.CustomFirebaseLogger
 import com.example.notesapp.utils.SpecificLocalDateTimeConverter
 import com.example.notesapp.viewmodel.NoteViewModel
 import com.example.notesapp.viewmodel.NoteViewModelFactory
@@ -63,11 +64,13 @@ class AddEditNoteFragment : Fragment() {
         val descText = binding.description.text.toString()
 
         val newNote = if (isAdd || note == null) {
-            Note(
+            val note = Note(
                 name = titleText,
                 description = descText,
                 createdAt = SpecificLocalDateTimeConverter.getDate()
             )
+            CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.ADD_NOTE, note)
+            note
         } else {
             note.copy(
                 name = titleText,

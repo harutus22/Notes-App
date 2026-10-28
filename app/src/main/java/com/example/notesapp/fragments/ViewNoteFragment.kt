@@ -13,6 +13,7 @@ import com.example.notesapp.App
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentViewNoteBinding
 import com.example.notesapp.room.Note
+import com.example.notesapp.utils.CustomFirebaseLogger
 import com.example.notesapp.viewmodel.NoteViewModel
 import com.example.notesapp.viewmodel.NoteViewModelFactory
 
@@ -50,10 +51,12 @@ class ViewNoteFragment : Fragment() {
                 note = note,
                 isAdd = false
             )
+            CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.VIEW_NOTE, note)
             findNavController().navigate(action)
         }
         binding.delete.setOnClickListener {
             viewModel.deleteNote(note)
+            CustomFirebaseLogger.logCustomEvent(CustomFirebaseLogger.Action.REMOVE_NOTE, note)
             findNavController().popBackStack()
         }
     }
